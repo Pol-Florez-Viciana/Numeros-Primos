@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<head>
+<html lang="es_ES" >
+<meta charset="UTF-8" >
+<meta name="author" content="Pol Flórez Viciana" >
+<meta name="owner" content="Pol Flórez Viciana" >
+<meta name="keywords" content="" >
+<title>Función de Ejemplo de Número Primo Optima de Pol 2.0</title>
+<meta name="description" content="Función de ejemplo para comprobar si un número es primo o no." >
+<meta name="robots" content="index, dofollow" >
+<style>
+	body {
+		background-color: rgb(0,0,0); text-align: center;
+	} 
+	h1 {
+		color: rgb(128,128,255); text-align: center; text-shadow: 0px 0px 25px green; margin: 0px;
+	}
+	h2 {
+		color: rgb(128,255,128); text-align: center; text-shadow: 0px 0px 25px white; margin: 0px;
+	}
+	h3 {
+		color: rgb(255,127,0); text-align: center; text-shadow: 0px 0px 25px white; margin: 0px;
+	}
+	p {
+		color: white; text-align: left;
+	}
+	a {
+		cursor: pointer;
+		background-color: rgb(64,64,255);
+		padding: 5px 5px 5px 5px;
+		border-radius: 25px;
+		color: yellow;
+		transition: all 0.8s linear;
+		border: 1px double white;
+	}
+	a:link { color: rgb(255,255,0); } 
+	a:visited { color: rgb(255,255,128); } 
+	a:hover { color: rgb(255,0,0); }
+
+	.MyInput {
+		cursor: pointer;
+		border-radius: 10px;
+		text-align: center; margin: 2px;
+	}
+	section {
+		vertical-align: text-top;
+		width: 92%; min-width: 420px; max-width: 960px; padding: 10px; 
+		background-color: rgb(32,32,32);
+		border-radius: 25px;	
+		position: absolute; 
+		top: 50%; left: 50%; 
+		transform: translate(-50%,-50%);
+		color: white;
+	}
+	#FechaInicioFechaFin{
+		position: fixed;
+		right: 5px;
+		bottom: 5px;
+		color: white;
+	}
+	#Pantalla1 {
+		display: inline-block;	
+	}
+	#Pantalla2 {
+		display: none;
+	}
+	.Centrado{
+		vertical-align: top;
+		display: inline-block;
+		text-align: center;
+	}
+	.Izquierda{
+		vertical-align: top;
+		display: inline-block;
+		text-align: left;
+	}
+	.Derecha{
+		vertical-align: top;
+		display: inline-block;
+		text-align: right;
+	}
+</style>
+</head>
+<body>
+<center>
+	<h1>Función es Número Primo Optimizada por Pol</h1>
+	<section id="Pantalla1" class="Derecha" >
+		<center>
+			<div class="Izquierda" style="width: 72%;" >
+				<input class="MyInput" type="button" id="BotonEjemplo" name="BotonEjemplo" onclick="Ir2()" value="Ejemplos" title="Ejemplos de Números Perfectos" />
+			</div>
+			<div class="Derecha" >
+				<input class="MyInput" type="button" id="BotonF0" name="BotonF0" onclick="Ir2()" value="Ayuda" style="background-color: red; color: white;" title="¿Necesitas Ayuda?" />
+			</div>
+			<h2>Introduzca el Número</h2>
+			<input id="TextBoxInput" type="text" value="" style="width: 120px;" />
+			<input id="BtnCompruebaPrimo" type="button" onclick="CompruebaNumeroPrimo()" value="Comprobar Número Primo" />
+		</center>
+	</section>
+	<section id="Pantalla2" class="Derecha" >
+		<input type="button" onclick="Ir1()" style="background-color: red; color: white;" value="X" />
+		<center>
+			<h2>Ayuda Para Comprobar Números Primos</h2>
+			<p>Introduzca el valor del número a comprobar y pulse sobre "Comprobar Número Primo" 
+			en la pantalla principal para comprobar si el número es primo o no, 
+			con este pequeño ejemplo de programación.</p>
+			<br><br>	
+		</center>
+	</section>
+</center>
+
+<footer id="FechaInicioFechaFin" ><a href="mailto:polflorez@hotmail.com">polflorez@hotmail.com</a> ~ 22/12/2024 - 22/12/2024</footer>
+
+<script>
+function CompruebaNumeroPrimo(){
+    var TextBoxInput = document.getElementById("TextBoxInput").value;
+	var EsPrimo = esNumeroPrimo(TextBoxInput);
+	alert(EsPrimo);
+}
+function esNumeroPrimo(Numero){
+        // Método Abreviado de Comprobación de Números Primos
+	var Retorno = true;
+	var x = 0;
+	Numero = parseFloat(Numero);
+	if (Number.isInteger(Numero) == true && Numero >= 0){
+		if (Numero == 0 || Numero == 1 || Numero == 4) { 
+			Retorno = false; 
+		}else{
+			if (Numero >= 4){
+				if (Numero % 2 == 0) { Retorno = false; }
+				if (Retorno == true ){
+					var LongitudEntero = "" + Numero;
+					if (LongitudEntero.length >= 3) {
+						for ( x = 3; x < Numero / 10; x = x + 2) {
+							if (Numero % x == 0) { Retorno = false; break; }
+						}
+					}else{
+						for ( x = 3; x < Numero / 2; x = x + 2) {
+							if (Numero % x == 0) { Retorno = false; break; }
+						}
+					}	
+				}
+			}		
+		}
+	}else{
+		Retorno = false;
+	}	
+	return Retorno;
+}
+function Ir1(){
+	document.getElementById("Pantalla1").style = "display: inline-block;";
+	document.getElementById("Pantalla2").style = "display: none;";
+}
+function Ir2(){
+	document.getElementById("Pantalla1").style = "display: none;";
+	document.getElementById("Pantalla2").style = "display: inline-block;";
+}
+</script>
+</body>
+</html>
