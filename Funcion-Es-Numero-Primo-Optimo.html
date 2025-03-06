@@ -5,7 +5,7 @@
 <meta name="author" content="Pol Flórez Viciana" >
 <meta name="owner" content="Pol Flórez Viciana" >
 <meta name="keywords" content="" >
-<title>Función de Ejemplo de Número Primo Optima de Pol 2.0</title>
+<title>Función de Ejemplo de Número Primo Optima de Pol 4.0</title>
 <meta name="description" content="Función de ejemplo para comprobar si un número es primo o no." >
 <meta name="robots" content="index, dofollow" >
 <style>
@@ -94,7 +94,8 @@
 			</div>
 			<h2>Introduzca el Número</h2>
 			<input id="TextBoxInput" type="text" value="" style="width: 120px;" />
-			<input id="BtnCompruebaPrimo" type="button" onclick="CompruebaNumeroPrimo()" value="Comprobar Número Primo" />
+			<input id="BtnCompruebaPrimo1" type="button" onclick="CompruebaNumeroPrimo()" value="Comprobar Número Primo" />
+			<input id="BtnCompruebaPrimo2" type="button" onclick="CompruebaNumeroPrimoOptima()" value="Comprobar Número Primo Optimizado" />
 		</center>
 	</section>
 	<section id="Pantalla2" class="Derecha" >
@@ -109,7 +110,7 @@
 	</section>
 </center>
 
-<footer id="FechaInicioFechaFin" ><a href="mailto:polflorez@hotmail.com">polflorez@hotmail.com</a> ~ 22/12/2024 - 22/12/2024</footer>
+<footer id="FechaInicioFechaFin" ><a href="mailto:polflorez@hotmail.com">polflorez@hotmail.com</a> ~ 22/12/2024 - 06/03/2025</footer>
 
 <script>
 function CompruebaNumeroPrimo(){
@@ -117,8 +118,36 @@ function CompruebaNumeroPrimo(){
 	var EsPrimo = esNumeroPrimo(TextBoxInput);
 	alert(EsPrimo);
 }
+function CompruebaNumeroPrimoOptima(){
+    var TextBoxInput = document.getElementById("TextBoxInput").value;
+	var EsPrimo = esNumeroPrimoOptima(TextBoxInput);
+	alert(EsPrimo);
+}
 function esNumeroPrimo(Numero){
-        // Método Abreviado de Comprobación de Números Primos
+    // Método original sin abreviado de comprobación de números primos
+	var Retorno = true;
+	var x = 0;
+	Numero = parseFloat(Numero);
+	if (Number.isInteger(Numero) == true && Numero >= 0){
+		if (Numero == 0 || Numero == 1 || Numero == 4) { 
+			Retorno = false; 
+		}else{
+			if (Numero >= 4){
+				if (Numero % 2 == 0) { Retorno = false; }
+				if (Retorno == true ){
+					for ( x = 3; x <= Numero / 2; x = x + 2) {
+						if (Numero % x == 0) { Retorno = false; break; }
+					}	
+				}
+			}		
+		}
+	}else{
+		Retorno = false;
+	}	
+	return Retorno;
+}
+function esNumeroPrimoOptima(Numero){
+    // Método abreviado para la comprobación de números primos
 	var Retorno = true;
 	var x = 0;
 	Numero = parseFloat(Numero);
@@ -130,14 +159,9 @@ function esNumeroPrimo(Numero){
 				if (Numero % 2 == 0) { Retorno = false; }
 				if (Retorno == true ){
 					var LongitudEntero = "" + Numero;
-					if (LongitudEntero.length >= 3) {
-						for ( x = 3; x < Numero / 10; x = x + 2) {
-							if (Numero % x == 0) { Retorno = false; break; }
-						}
-					}else{
-						for ( x = 3; x < Numero / 2; x = x + 2) {
-							if (Numero % x == 0) { Retorno = false; break; }
-						}
+					var Limite = parseInt(Math.sqrt(Numero));
+					for ( x = 3; x <= Limite; x = x + 2) {
+						if (Numero % x == 0) { Retorno = false; break; }
 					}	
 				}
 			}		
