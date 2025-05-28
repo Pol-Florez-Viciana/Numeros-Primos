@@ -5,7 +5,7 @@
 <meta name="author" content="Pol Flórez Viciana" >
 <meta name="owner" content="Pol Flórez Viciana" >
 <meta name="keywords" content="" >
-<title>Función de Ejemplo de Número Primo Optima de Pol 6.1</title>
+<title>Función de Ejemplo de Número Primo Optima de Pol 7.1</title>
 <meta name="description" content="Función de ejemplo para comprobar si un número es primo o no." >
 <meta name="robots" content="index, dofollow" >
 <style>
@@ -83,7 +83,7 @@
 </head>
 <body>
 <center>
-	<h1>Función es Número Primo Optimizada por Pol</h1>
+	<h1>Función es Número Primo 7.1 Optimizada por Pol</h1>
 	<section id="Pantalla1" class="Derecha" >
 		<center>
 			<div class="Izquierda" style="width: 72%;" >
@@ -92,10 +92,15 @@
 			<div class="Derecha" >
 				<input class="MyInput" type="button" id="BotonF0" name="BotonF0" onclick="Ir2()" value="Ayuda" style="background-color: red; color: white;" title="¿Necesitas Ayuda?" />
 			</div>
-			<h2>Introduzca el Número</h2>
-			<input id="TextBoxInput" type="text" value="" style="width: 120px;" />
-			<input id="BtnCompruebaPrimo1" type="button" onclick="CompruebaNumeroPrimo()" value="Comprobar Número Primo" />
-			<input id="BtnCompruebaPrimo2" type="button" onclick="CompruebaNumeroPrimoOptima()" value="Comprobar Número Primo Optimizado" />
+			<h2>Números Primos 7.1</h2>
+			<h3>Introduzca el Número a Comprobar</h3>
+			<input id="TextBoxInput" type="text" value="" placeholder="Introduzca un Número Natural" style="width: 200px;" />
+			<br><br>
+			<input id="BtnCompruebaPrimo1" type="button" onclick="CompruebaNumeroPrimo()" value="Comprobar Primo" />
+			<input id="BtnCompruebaPrimo2" type="button" onclick="CompruebaNumeroPrimoOptima()" value="Comprobar Primo Optimo" />
+			<br><br>
+			<h3>Resultado</h3>
+			<input id="TextBoxResult" type="text" title="Resultado 0 si es primo, si no, el resultado es su divisor entero." readonly="true" style="width: 200px; text-align: center;" />
 		</center>
 	</section>
 	<section id="Pantalla2" class="Derecha" >
@@ -103,79 +108,86 @@
 		<center>
 			<h2>Ayuda Para Comprobar Números Primos</h2>
 			<p>Introduzca el valor del número a comprobar y pulse sobre "Comprobar Número Primo" 
-			en la pantalla principal para comprobar si el número es primo o no, 
-			con este pequeño ejemplo de programación.</p>
-			<br><br>	
+				en la pantalla principal para comprobar si el número es primo o no, 
+				con este pequeño ejemplo de programación.<br>
+				<br>
+				La App devuelve 0 si es cierto, y el múltiplo de X que lo divide enteramente, cuando no lo es.<br> 
+			</p>
+			<br>	
 		</center>
 	</section>
 </center>
 
-<footer id="FechaInicioFechaFin" ><a href="mailto:polflorez@hotmail.com">polflorez@hotmail.com</a> ~ 22/12/2024 - 11/03/2025</footer>
+<footer id="FechaInicioFechaFin" ><a href="mailto:polflorez@hotmail.com">polflorez@hotmail.com</a> ~ 22/12/2024 - 28/05/2025</footer>
 
 <script>
 function CompruebaNumeroPrimo(){
     var TextBoxInput = document.getElementById("TextBoxInput").value;
 	var EsPrimo = esNumeroPrimo(TextBoxInput);
-	alert(EsPrimo);
+	document.getElementById("TextBoxResult").value = EsPrimo;
 }
 function CompruebaNumeroPrimoOptima(){
     var TextBoxInput = document.getElementById("TextBoxInput").value;
 	var EsPrimo = esNumeroPrimoOptima(TextBoxInput);
-	alert(EsPrimo);
+	document.getElementById("TextBoxResult").value = EsPrimo;
 }
 function esNumeroPrimo(Numero){
     // Método original sin abreviado de comprobación de números primos
-	var Retorno = true;
+	//var Retorno = 0;
 	Numero = parseFloat(Numero);
 	if (Number.isInteger(Numero) == true && Numero >= 0){
 		if (Numero == 0 || Numero == 1 || Numero == 4) { 
-			Retorno = false; 
+			return 1; 
 		}else{
-			if (Numero >= 4){
-				if (Numero % 2 == 0) { Retorno = false; }
-				if (Retorno == true ){
-					var Limite = parseInt(Math.sqrt(Numero));
-					var x = 3;
-					for ( x = 3; x <= Limite; x = x + 2) {
-						if (Numero % x == 0) { Retorno = false; break; }
-					}	
-				}
-			}		
+			if (Numero == 2 || Numero == 3 || Numero == 5 || Numero == 7 ){ return 0; }
+			if (Numero % 2 == 0) { return 2; }
+			var Limite = parseInt(Math.sqrt(Numero));
+			var x = 3;
+			if (Limite < x) { Limite = x ; }
+			for ( x = 3; x <= Limite; x = x + 2) {
+				if (Numero % x == 0) { return x; break; }
+			}										
 		}
 	}else{
-		Retorno = false;
+		return 1;
 	}	
-	return Retorno;
+	return 0;
 }
 function esNumeroPrimoOptima(Numero){
     // Método abreviado para la comprobación de números primos
-	var Retorno = true;
+	//var Retorno = 0;
 	Numero = parseFloat(Numero);
 	if (Number.isInteger(Numero) == true && Numero >= 0){
 		if (Numero == 0 || Numero == 1 || Numero == 4) { 
-			Retorno = false; 
-		}else{
+			return 1; 
+		}else{			
 			if (Numero >= 4){
-				if (Numero % 2 == 0) { Retorno = false; }
-				if (Numero % 3 == 0) { Retorno = false; }
-				if (Numero % 5 == 0) { Retorno = false; }
-				if (Numero % 7 == 0) { Retorno = false; }
-				if (Retorno == true ){
-					var Limite = Math.sqrt(Numero);
-					if (Number.isInteger(Limite) == true ) { Retorno = false; }
-					if (Retorno == true ){
-						var x = 0;
-						for ( x = 3; x <= parseInt(Limite); x = x + 2) {
-							if (Numero % x == 0) { Retorno = false; break; }
-						}
-					}	
-				}
+				if (Numero == 2 || Numero == 3 || Numero == 5 || Numero == 7 ){ return 0; }
+				if (Numero % 2 == 0) { return 2; }
+				if (Numero % 3 == 0) { return 3; }
+				if (Numero % 5 == 0) { return 5; }
+				if (Numero % 7 == 0) { return 7; }
+				if (Numero >= 100 ){
+					var Limite = parseInt(Math.sqrt(Numero));
+					var x = 7;
+					for ( x = 7; x <= Limite; x = x + 2) {
+						if (Numero % x == 0) { return x; break; }
+					}
+				}else{
+					var Limite = parseInt(Numero / 2);
+					var x = 3;
+					for ( x = 3; x <= Limite; x = x + 2) {
+						if (Numero % x == 0) { return x; break; }
+					}
+				}	
+			}else{
+				return 0;
 			}		
 		}
 	}else{
-		Retorno = false;
-	}	
-	return Retorno;
+		return 1;
+	}
+	return 0;	
 }
 function Ir1(){
 	document.getElementById("Pantalla1").style = "display: inline-block;";
